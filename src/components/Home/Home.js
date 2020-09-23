@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import fakeData from '../../fakeData/fakeData';
 import Room from '../Room/Room';
 
+
 const Home = () => {
+    const [suits, setSuits] = useState(fakeData);
     const style = {
         display: 'flex',
         margin: '40px',
@@ -39,10 +42,16 @@ const Home = () => {
             price: 199
         }
     ]
+    useEffect(() => {
+
+    })
     return (
         <div style={style}>
-            {
+            {/* {
                 rooms.map(room => <Room key={room.bedType} room={room}></Room>)
+            } */}
+            {
+                suits.map(room => <Room key={room.bedType} room={room}></Room>)
             }
         </div>
     );
