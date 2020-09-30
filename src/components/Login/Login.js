@@ -26,7 +26,8 @@ const Login = () => {
             const { displayName, email } = result.user;
             const signedUser = { name: displayName, email }
             setLoggedInUser(signedUser);
-            history.replace(from);
+            storeAuthToken(); // call backend server
+
             // ...
         }).catch(function (error) {
             // Handle Errors here.
@@ -34,6 +35,18 @@ const Login = () => {
             console.log(errorCode);
         });
     }
+
+    //to load/ store individual data from backend server through booings
+    const storeAuthToken = () => {
+        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+            .then(function (idToken) {
+                sessionStorage.setItem('token', idToken); // store data in sessionStorage
+                history.replace(from);
+            }).catch(function (error) {
+                // Handle error
+            });
+    }
+
     return (
         <div>
             <h1>This is Login</h1>
